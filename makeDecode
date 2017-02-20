@@ -1,0 +1,13 @@
+#!/bin/bash
+
+g++ -std=c++11 -Wall -g -Werror -Wno-long-long -pedantic -ansi -c MyOnlineDecoder.cpp  -c DecoderMain.cpp
+
+g++ -std=c++11 -Wall -g -Werror -Wno-long-long -pedantic -ansi MyOnlineDecoder.o DecoderMain.o -o decoder
+
+./decoder
+
+#uncomment if you want to check with valgrind
+#valgrind -q --leak-check=full --track-origins=yes -v ./decoder
+
+# removing temporary files intermediate objec files etc..
+rm *.o

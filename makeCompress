@@ -1,0 +1,13 @@
+#!/bin/bash
+
+g++ -std=c++11 -Wall -g -Werror -Wno-long-long -pedantic -ansi -c MyOnlineCoder.cpp  -c EncoderMain.cpp
+
+g++ -std=c++11 -Wall -g -Werror -Wno-long-long -pedantic -ansi MyOnlineCoder.o EncoderMain.o -o encoder
+
+./encoder
+
+#uncomment if you want to check with valgrind
+#valgrind -q --leak-check=full --track-origins=yes -v ./encoder
+
+#echo "removing temporary files...."
+rm *.o

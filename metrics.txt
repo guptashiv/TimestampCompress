@@ -1,0 +1,32 @@
+filesizes:
+-rw-rw-r-- 1 shiv shiv  734126 Apr  3 04:44 myEncoded.bin
+-rw-rw-r-- 1 shiv shiv 8121780 Apr  3 04:45 myTimestamps
+-rw-rw-r-- 1 shiv shiv 8121780 Mar 28 23:12 timestamps
+
+compression ratio = (734126*8)/451211 = 13.016101 bits/timestamp
+
+the statistics for 10 executions of encoding and decoding methods:  
+parseAndEncode:
+avg. = 1.808 usec/timestamp
+mean deviation = 0.157 usec/timestamp
+standard deviation = 0.127 usec/timestamp
+
+parseAndDecode():
+avg.  = 4.542 usec/timestamp
+mean deviation = 0.253 usec/timestamp
+standard deviation = 0.224 usec/timestamp
+
+(note that the deviations are avg of deviations calculated for all 451211 timestamps.)
+
+
+Note: the method includes both reading and conversion, hence the additional read-write cost is also added.
+(unlike the 2 different methods given in the desc.)
+
+
+Notes on further improvements:
+The minimum number of bytes to store difference is 1-bytes right now.
+Also using n-byes only 8*n-n bits of numbers can be stored.
+
+as of now the identifier is very straight 1, 01, 001, 0001 and so on.
+a better way to recognise the number of bytes to consider for current timestamp-difference can improve terminal cases.
+(e.g., as of now even for storing 2^21 we have to use 4-bytes. That's BAD!)
