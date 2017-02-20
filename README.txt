@@ -7,6 +7,38 @@ This is an implimentation of such encoding, filenames are self explanatory.
 
 make* files contain the scripts for running this first-hand, without watching any code. But make sure you change the file-permissions appropriately.
 
+
+Algorithm metadata:
+	Compression Algo:
+		1. Store first timestamp as Base
+		2. then, store all the differences depending on following
+		   "1 <7-bits>" if difference is less then 2^7
+		   "01<14 bits>" if it's between 2^7 to 2 ^14
+		   "001<21 bits>" if it's between 2^14 and 2^21... and so on
+		*the position of first '1' will tell the number of bytes to consider for decoding
+		3. from the TempFile now read 1 byte at a time and write it on a Binary File.
+
+
+	Decoding Algo:
+      		1. read base just once (first 8-bytes), store it in lastNum
+      		2. read a byte
+         		if(it starts with 1), convert it to diff by subtracting (2^7)
+         		if(it starts with 01), take 2 bytes and subtract 2^14
+		         if(it starts with 001) take 3 bytes and subtract 2^21
+		         so on...
+		3. update lastNum by adding the diff
+      		4. convert back to Double
+      		5. print double(lastnum)
+
+
+
+Complexity:
+	Encoding: O(n), where n is the size of file to be encoded.
+	   It is evident since we are scanning through the input file and without processing any other information, compressing it on-line.
+
+	Decoding: O(n)
+	   Again, the similar explanation. 
+
 just to run and check, run this on the terminal
 |----------------------------------------------------------------------|
 
