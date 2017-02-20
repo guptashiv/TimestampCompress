@@ -1,3 +1,11 @@
+Devices scanning forever for the timestamps, in order to keep the data/system Recoverable, stamps a zillion of timestamps.
+
+Considering that timestamps are 32 bit numbers, sending an ASCII file of timestamps, gets very very frustrating.
+Compressing such files with known info to binary file can reduce the space almost to log times. (But remember, extracting the file ERRORFREE is a constraint never to be forgotten.)
+
+This is an implimentation of such encoding, filenames are self explanatory.
+
+make* files contain the scripts for running this first-hand, without watching any code. But make sure you change the file-permissions appropriately.
 
 just to run and check, run this on the terminal
 |----------------------------------------------------------------------|
